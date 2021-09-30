@@ -157,18 +157,18 @@ STATIC mp_obj_t mod_os_rmdir(mp_obj_t path_in) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_os_rmdir_obj, mod_os_rmdir);
 
-STATIC mp_obj_t mod_os_system(mp_obj_t cmd_in) {
-    const char *cmd = mp_obj_str_get_str(cmd_in);
+// STATIC mp_obj_t mod_os_system(mp_obj_t cmd_in) {
+//     const char *cmd = mp_obj_str_get_str(cmd_in);
 
-    MP_THREAD_GIL_EXIT();
-    int r = system(cmd);
-    MP_THREAD_GIL_ENTER();
+//     MP_THREAD_GIL_EXIT();
+//     int r = system(cmd);
+//     MP_THREAD_GIL_ENTER();
 
-    RAISE_ERRNO(r, errno);
+//     RAISE_ERRNO(r, errno);
 
-    return MP_OBJ_NEW_SMALL_INT(r);
-}
-MP_DEFINE_CONST_FUN_OBJ_1(mod_os_system_obj, mod_os_system);
+//     return MP_OBJ_NEW_SMALL_INT(r);
+// }
+// MP_DEFINE_CONST_FUN_OBJ_1(mod_os_system_obj, mod_os_system);
 
 STATIC mp_obj_t mod_os_getenv(mp_obj_t var_in) {
     const char *s = getenv(mp_obj_str_get_str(var_in));
@@ -312,7 +312,7 @@ STATIC const mp_rom_map_elem_t mp_module_os_globals_table[] = {
     #if MICROPY_PY_OS_STATVFS
     { MP_ROM_QSTR(MP_QSTR_statvfs), MP_ROM_PTR(&mod_os_statvfs_obj) },
     #endif
-    { MP_ROM_QSTR(MP_QSTR_system), MP_ROM_PTR(&mod_os_system_obj) },
+    // { MP_ROM_QSTR(MP_QSTR_system), MP_ROM_PTR(&mod_os_system_obj) },
     { MP_ROM_QSTR(MP_QSTR_remove), MP_ROM_PTR(&mod_os_remove_obj) },
     { MP_ROM_QSTR(MP_QSTR_rename), MP_ROM_PTR(&mod_os_rename_obj) },
     { MP_ROM_QSTR(MP_QSTR_rmdir), MP_ROM_PTR(&mod_os_rmdir_obj) },

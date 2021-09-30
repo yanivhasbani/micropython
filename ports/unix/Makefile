@@ -91,9 +91,9 @@ endif
 # if necessary override the value of 'CC' set in py/mkenv.mk
 ifeq ($(UNAME_S),Darwin)
 ifeq ($(MICROPY_FORCE_32BIT),1)
-CC = clang -m32
+CC = xcrun --sdk iphoneos clang -m32 -arch arm64
 else
-CC = clang
+CC = xcrun --sdk iphoneos clang -arch arm64
 endif
 # Use clang syntax for map file
 LDFLAGS_ARCH = -Wl,-map,$@.map -Wl,-dead_strip
@@ -208,7 +208,7 @@ ifeq ($(UNAME_S),Linux)
 LIBFFI_LDFLAGS_MOD += -ldl
 endif
 
-CFLAGS_MOD += $(LIBFFI_CFLAGS_MOD) -DMICROPY_PY_FFI=1
+CFLAGS_MOD += $(LIBFFI_CFLAGS_MOD) -DMICROPY_PY_FFI=1 
 LDFLAGS_MOD += $(LIBFFI_LDFLAGS_MOD)
 SRC_MOD += modffi.c
 endif
@@ -231,6 +231,7 @@ SRC_C += \
 	moduos_vfs.c \
 	modtime.c \
 	moduselect.c \
+	mymodule.c\
 	alloc.c \
 	fatfs_port.c \
 	mpbthciport.c \
@@ -284,7 +285,7 @@ endif
 CXXFLAGS += $(filter-out -Wmissing-prototypes -Wold-style-definition -std=gnu99,$(CFLAGS) $(CXXFLAGS_MOD))
 
 ifeq ($(MICROPY_FORCE_32BIT),1)
-RUN_TESTS_MPY_CROSS_FLAGS = --mpy-cross-flags='-march=x86'
+RUN_TESTS_MPY_CROSS_FLAGS = --mpy-cross-flags='-march=arm64'
 endif
 
 ifeq ($(CROSS_COMPILE),arm-linux-gnueabi-)
