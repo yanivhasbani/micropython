@@ -186,3 +186,39 @@ productive, please be sure to follow the
 and the [Code Conventions](https://github.com/micropython/micropython/blob/master/CODECONVENTIONS.md).
 Note that MicroPython is licenced under the MIT license, and all contributions
 should follow this license.
+
+
+
+
+
+ARM64
+-----
+
+# How to install
+
+## Preconfigure
+
+```
+sudo xcode-select--switch /Applications/Xcode.app
+brew install libtool
+brew install automake
+brew install pkgconfig
+brew install libffi
+```
+
+## libffi
+```
+cd ./lib/libffi
+./autogen.sh
+
+python generate-darwin-source-and-headers.py --only-ios
+```
+
+
+## Make
+
+```
+cd ports/unix
+make CROSS_COMPILE=arm64 V=1 libffi
+make MICROPY_STANDALONE=1 V=1
+```
