@@ -231,7 +231,6 @@ SRC_C += \
 	moduos_vfs.c \
 	modtime.c \
 	moduselect.c \
-	mymodule.c\
 	alloc.c \
 	fatfs_port.c \
 	mpbthciport.c \
